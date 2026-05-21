@@ -97,7 +97,7 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
             />
             {isSpeaking && <span className="animate-speak" />}
           </div>
-          <h3>AI Interviewer</h3>
+          <h3>Entrevistador IA</h3>
         </div>
 
         <div className="card-border">
@@ -139,11 +139,13 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
               )}
             />
 
-            <span>{isCallInactiveOrFinished ? "Call" : ". . ."}</span>
+            <span>
+              {isCallInactiveOrFinished ? "Iniciar llamada" : "Conectando..."}
+            </span>
           </button>
         ) : (
           <button className="btn-disconnect" onClick={handleDisconnect}>
-            End
+            Finalizar
           </button>
         )}
       </div>

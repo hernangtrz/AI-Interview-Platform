@@ -14,7 +14,7 @@ const InterviewCard = ({
   createdAt,
 }: InterviewCardProps) => {
   const feedback = null as Feedback | null;
-  const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
+  const normalizedType = /mix/gi.test(type) ? "Mixta" : type;
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now(),
   ).format("MMM D, YYYY");
@@ -35,7 +35,7 @@ const InterviewCard = ({
             className="rounded-full object-fit size-[90px]"
           />
 
-          <h3 className="mt-5 capitalize">{role} Interview</h3>
+          <h3 className="mt-5 capitalize">Entrevista de {role}</h3>
 
           <div className="flex flex-row gap-5 mt-3">
             <div className="flex flex-row gap-2">
@@ -56,7 +56,7 @@ const InterviewCard = ({
 
           <p className="line-clamp-2 mt-5">
             {feedback?.finalAssessment ||
-              "You haven't taken the interview yet. Take it now to improve your skills."}
+              "Aún no has realizado esta entrevista. Hazla ahora para mejorar tus habilidades."}
           </p>
         </div>
 
@@ -71,7 +71,7 @@ const InterviewCard = ({
                   : `/interview/${interviewId}`
               }
             >
-              {feedback ? "Check Feedback" : "View Interview"}
+              {feedback ? "Ver retroalimentación" : "Ver entrevista"}
             </Link>
           </Button>
         </div>

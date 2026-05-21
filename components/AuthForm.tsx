@@ -64,7 +64,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           return;
         }
 
-        toast.success("Account created successfully. Please sign in.");
+        toast.success("Cuenta creada con éxito. Por favor inicia sesión.");
         router.push("/sign-in");
       } else {
         const { email, password } = data;
@@ -77,7 +77,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
         const idToken = await userCredential.user.getIdToken();
         if (!idToken) {
-          toast.error("Sign in Failed. Please try again.");
+          toast.error("Error al iniciar sesión. Intenta nuevamente.");
           return;
         }
 
@@ -86,7 +86,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           idToken,
         });
 
-        toast.success("Signed in successfully.");
+        toast.success("Sesión iniciada correctamente.");
         router.push("/");
       }
     } catch (error) {
@@ -101,11 +101,16 @@ const AuthForm = ({ type }: { type: FormType }) => {
     <div className="card-border lg:min-w-[566px]">
       <div className="flex flex-col gap-6 card py-14 px-10">
         <div className="flex flex-row gap-2 justify-center">
-          <Image src="/logo.svg" alt="logo" height={32} width={38} />
+          <Image
+            src="/logo.svg"
+            alt="logo de PrepWise"
+            height={32}
+            width={38}
+          />
           <h2 className="text-primary-100">PrepWise</h2>
         </div>
 
-        <h3>Practice job interviews with AI</h3>
+        <h3>Practica entrevistas de trabajo con IA</h3>
 
         <Form {...form}>
           <form
@@ -116,8 +121,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
               <FormField
                 control={form.control}
                 name="name"
-                label="Name"
-                placeholder="Your Name"
+                label="Nombre"
+                placeholder="Tu nombre"
                 type="text"
               />
             )}
@@ -125,32 +130,32 @@ const AuthForm = ({ type }: { type: FormType }) => {
             <FormField
               control={form.control}
               name="email"
-              label="Email"
-              placeholder="Your email address"
+              label="Correo electrónico"
+              placeholder="Tu correo electrónico"
               type="email"
             />
 
             <FormField
               control={form.control}
               name="password"
-              label="Password"
-              placeholder="Enter your password"
+              label="Contraseña"
+              placeholder="Ingresa tu contraseña"
               type="password"
             />
 
             <Button className="btn" type="submit">
-              {isSignIn ? "Sign In" : "Create an Account"}
+              {isSignIn ? "Iniciar sesión" : "Crear cuenta"}
             </Button>
           </form>
         </Form>
 
         <p className="text-center">
-          {isSignIn ? "No account yet?" : "Have an account already?"}
+          {isSignIn ? "¿No tienes cuenta?" : "¿Ya tienes cuenta?"}
           <Link
             href={!isSignIn ? "/sign-in" : "/sign-up"}
             className="font-bold text-user-primary ml-1"
           >
-            {!isSignIn ? "Sign In" : "Sign Up"}
+            {!isSignIn ? "Iniciar sesión" : "Regístrate"}
           </Link>
         </p>
       </div>

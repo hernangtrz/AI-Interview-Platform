@@ -14,7 +14,7 @@ export async function signUp(params: SignUpParams) {
     if (userRecord.exists) {
       return {
         success: false,
-        message: "User already exists. Please sign in instead.",
+        message: "El usuario ya existe. Por favor inicia sesión.",
       };
     }
 
@@ -25,7 +25,7 @@ export async function signUp(params: SignUpParams) {
 
     return {
       success: true,
-      message: "Account created successfully. Please sign in.",
+      message: "Cuenta creada con éxito. Por favor inicia sesión.",
     };
   } catch (e: any) {
     console.error("Error creating a user", e);
@@ -33,13 +33,13 @@ export async function signUp(params: SignUpParams) {
     if (e.code === "auth/email-already-exists") {
       return {
         success: false,
-        message: "This email is already in use.",
+        message: "Este correo ya está en uso.",
       };
     }
 
     return {
       success: false,
-      message: "Failed to create an account",
+      message: "No se pudo crear la cuenta.",
     };
   }
 }
@@ -53,7 +53,7 @@ export async function signIn(params: SignInParams) {
     if (!userRecord) {
       return {
         success: false,
-        message: "User does not exist. Create an account instead.",
+        message: "El usuario no existe. Crea una cuenta en su lugar.",
       };
     }
 
@@ -63,7 +63,7 @@ export async function signIn(params: SignInParams) {
 
     return {
       success: false,
-      message: "Failed to log into an account.",
+      message: "No se pudo iniciar sesión.",
     };
   }
 }
