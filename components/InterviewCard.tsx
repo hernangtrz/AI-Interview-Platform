@@ -4,8 +4,9 @@ import { getRandomInterviewCover } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import DisplayTechIcons from "@/components/DisplayTechIcons";
+import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
 
-const InterviewCard = ({
+const InterviewCard = async ({
   id,
   userId,
   role,
@@ -13,11 +14,21 @@ const InterviewCard = ({
   techstack,
   createdAt,
 }: InterviewCardProps) => {
-  const feedback = null as Feedback | null;
-  const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
+  const feedback =
+    userId && id
+      ? await getFeedbackByInterviewId({ interviewId: id, userId })
+      : null;
+  const normalizeType = (value: string) => {
+    if (/mix|combinada|mixed/gi.test(value)) return "Mixta";
+    if (/tech|técnica/gi.test(value)) return "Técnica";
+    if (/conduct|conductual/gi.test(value)) return "Conductual";
+    if (/cultural|fit/gi.test(value)) return "Ajuste cultural";
+    return value;
+  };
+  const normalizedType = normalizeType(type);
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now(),
-  ).format("MMM D, YYYY");
+  ).format("DD/MM/YYYY");
 
   return (
     <div className="card-border w-[360px] max-sm:w-full min-h-96">
@@ -29,19 +40,19 @@ const InterviewCard = ({
 
           <Image
             src={getRandomInterviewCover()}
-            alt="cover image"
+            alt="imagen de portada"
             width={90}
             height={90}
             className="rounded-full object-fit size-[90px]"
           />
 
-          <h3 className="mt-5 capitalize">{role} Interview</h3>
+          <h3 className="mt-5 capitalize">Entrevista de {role}</h3>
 
           <div className="flex flex-row gap-5 mt-3">
             <div className="flex flex-row gap-2">
               <Image
                 src="/calendar.svg"
-                alt="calendar"
+                alt="calendario"
                 width={22}
                 height={22}
               />
@@ -49,14 +60,14 @@ const InterviewCard = ({
             </div>
 
             <div className="flex flex-row gap-2 items-center">
-              <Image src="/star.svg" alt="star" width={22} height={22} />
+              <Image src="/star.svg" alt="estrella" width={22} height={22} />
               <p>{feedback?.totalScore || "---"}/100</p>
             </div>
           </div>
 
           <p className="line-clamp-2 mt-5">
             {feedback?.finalAssessment ||
-              "You haven't taken the interview yet. Take it now to improve your skills."}
+              "Aún no has realizado esta entrevista. Hazla ahora para mejorar tus habilidades."}
           </p>
         </div>
 
@@ -67,7 +78,7 @@ const InterviewCard = ({
             <Link
               href={feedback ? `/interview/${id}/feedback` : `/interview/${id}`}
             >
-              {feedback ? "Check Feedback" : "View Interview"}
+              {feedback ? "Ver retroalimentación" : "Ver entrevista"}
             </Link>
           </Button>
         </div>

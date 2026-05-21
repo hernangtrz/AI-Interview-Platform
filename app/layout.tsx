@@ -11,7 +11,8 @@ const monaSans = Mona_Sans({
 
 export const metadata: Metadata = {
   title: "PrepWise",
-  description: "An AI-powered platform for preparing for mock interviews",
+  description:
+    "Plataforma impulsada por IA para preparar entrevistas simuladas",
 };
 
 export default function RootLayout({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="es" className="dark">
       <body className={`${monaSans.className} antialiased pattern`}>
         {children}
 

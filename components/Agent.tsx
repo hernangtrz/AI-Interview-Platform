@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
+import { createFeedback } from "@/lib/actions/general.action";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -68,11 +69,11 @@ const Agent = ({
   const handleGenerateFeedback = async (messages: SavedMessage[]) => {
     console.log("Generate feedback here.");
 
-    // TODO: Create a server action that generates feedback
-    const { success, id } = {
-      success: true,
-      id: "feedback-id",
-    };
+    const { success, feedbackId: id } = await createFeedback({
+      interviewId: interviewId!,
+      userId: userId!,
+      transcript: messages,
+    });
 
     if (success && id) {
       router.push(`/interview/${interviewId}/feedback`);
@@ -143,7 +144,7 @@ const Agent = ({
             />
             {isSpeaking && <span className="animate-speak" />}
           </div>
-          <h3>AI Interviewer</h3>
+          <h3>Entrevistador IA</h3>
         </div>
 
         <div className="card-border">
@@ -185,11 +186,13 @@ const Agent = ({
               )}
             />
 
-            <span>{isCallInactiveOrFinished ? "Call" : ". . ."}</span>
+            <span>
+              {isCallInactiveOrFinished ? "Iniciar llamada" : "Conectando..."}
+            </span>
           </button>
         ) : (
           <button className="btn-disconnect" onClick={handleDisconnect}>
-            End
+            Finalizar
           </button>
         )}
       </div>
