@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import InterviewCard from "@/components/InterviewCard";
+import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
-  getCurrentUser,
   getInterviewsByUserId,
   getLatestInterviews,
-} from "@/lib/actions/auth.action";
+} from "@/lib/actions/general.action";
 
 const Page = async () => {
   const user = await getCurrentUser();
@@ -24,15 +24,13 @@ const Page = async () => {
     <>
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
-          <h2>
-            Prepárate para entrevistas con práctica y feedback impulsados por IA
-          </h2>
+          <h2>Get Interview-Ready with AI-Powered Practice & Feedback</h2>
           <p className="text-lg">
-            Practica con preguntas reales y recibe retroalimentación instantánea
+            Practice on real interview questions & get instant feedback
           </p>
 
           <Button asChild className="btn-primary max-sm:w-full">
-            <Link href="/interview">Iniciar una entrevista</Link>
+            <Link href="/interview">Start an Interview</Link>
           </Button>
         </div>
 
@@ -46,7 +44,7 @@ const Page = async () => {
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
-        <h2>Tus entrevistas</h2>
+        <h2>Your Interviews</h2>
 
         <div className="interviews-section">
           {hasPastInterviews ? (
@@ -54,13 +52,13 @@ const Page = async () => {
               <InterviewCard {...interview} key={interview.id} />
             ))
           ) : (
-            <p>Aún no has realizado ninguna entrevista</p>
+            <p>You haven&apos;t taken any interviews yet</p>
           )}
         </div>
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
-        <h2>Realiza una entrevista</h2>
+        <h2>Take an Interview</h2>
 
         <div className="interviews-section">
           {hasUpcomingInterviews ? (
@@ -68,7 +66,7 @@ const Page = async () => {
               <InterviewCard {...interview} key={interview.id} />
             ))
           ) : (
-            <p>No hay nuevas entrevistas disponibles</p>
+            <p>There are no new interviews available</p>
           )}
         </div>
       </section>

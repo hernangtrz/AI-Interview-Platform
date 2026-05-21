@@ -6,7 +6,7 @@ import Link from "next/link";
 import DisplayTechIcons from "@/components/DisplayTechIcons";
 
 const InterviewCard = ({
-  interviewId,
+  id,
   userId,
   role,
   type,
@@ -14,7 +14,7 @@ const InterviewCard = ({
   createdAt,
 }: InterviewCardProps) => {
   const feedback = null as Feedback | null;
-  const normalizedType = /mix/gi.test(type) ? "Mixta" : type;
+  const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now(),
   ).format("MMM D, YYYY");
@@ -35,7 +35,7 @@ const InterviewCard = ({
             className="rounded-full object-fit size-[90px]"
           />
 
-          <h3 className="mt-5 capitalize">Entrevista de {role}</h3>
+          <h3 className="mt-5 capitalize">{role} Interview</h3>
 
           <div className="flex flex-row gap-5 mt-3">
             <div className="flex flex-row gap-2">
@@ -56,7 +56,7 @@ const InterviewCard = ({
 
           <p className="line-clamp-2 mt-5">
             {feedback?.finalAssessment ||
-              "Aún no has realizado esta entrevista. Hazla ahora para mejorar tus habilidades."}
+              "You haven't taken the interview yet. Take it now to improve your skills."}
           </p>
         </div>
 
@@ -65,13 +65,9 @@ const InterviewCard = ({
 
           <Button className="btn-primary">
             <Link
-              href={
-                feedback
-                  ? `/interview/${interviewId}/feedback`
-                  : `/interview/${interviewId}`
-              }
+              href={feedback ? `/interview/${id}/feedback` : `/interview/${id}`}
             >
-              {feedback ? "Ver retroalimentación" : "Ver entrevista"}
+              {feedback ? "Check Feedback" : "View Interview"}
             </Link>
           </Button>
         </div>
