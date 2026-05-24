@@ -15,7 +15,7 @@ export async function POST(request: Request) {
 
   try {
     const { text: questions } = await generateText({
-      model: google("gemini-2.0-flash"),
+      model: google("gemini-3.1-flash-lite-preview"),
       prompt: `Prepara preguntas para una entrevista de trabajo.
         El rol de el trabajo es ${role}.
         El nivel de experiencia es ${level}.
