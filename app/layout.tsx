@@ -10,9 +10,9 @@ const monaSans = Mona_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "PrepWise",
+  title: "DevCareer AI",
   description:
-    "Plataforma impulsada por IA para preparar entrevistas simuladas",
+    "Plataforma impulsada por IA para entrevistas, creación y análisis de CV profesional",
 };
 
 export default function RootLayout({

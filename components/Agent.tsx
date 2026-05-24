@@ -79,14 +79,14 @@ const Agent = ({
       router.push(`/interview/${interviewId}/feedback`);
     } else {
       console.log("Error saving feedback");
-      router.push("/");
+      router.push("/dashboard");
     }
   };
 
   useEffect(() => {
     if (callStatus === CallStatus.FINISHED) {
       if (type === "generate") {
-        router.push("/");
+        router.push("/dashboard");
       } else {
         handleGenerateFeedback(messages);
       }
@@ -137,11 +137,11 @@ const Agent = ({
         <div className="card-interviewer">
           <div className="avatar">
             <Image
-              src="/ai-avatar.png"
+              src="/ai-avatar_v2.png"
               alt="vapi"
-              width={65}
-              height={54}
-              className="object-cover"
+              width={120}
+              height={120}
+              className="rounded-full object-cover size-[120px]"
             />
             {isSpeaking && <span className="animate-speak" />}
           </div>

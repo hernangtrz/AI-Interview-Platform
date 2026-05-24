@@ -10,6 +10,7 @@ import { getRandomInterviewCover } from "@/lib/utils";
 export async function getInterviewsByUserId(
   userId: string,
 ): Promise<Interview[] | null> {
+  if (!userId) return [];
   const interviews = await db
     .collection("interviews")
     .where("userId", "==", userId)

@@ -87,7 +87,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
         });
 
         toast.success("Sesión iniciada correctamente.");
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -103,11 +103,11 @@ const AuthForm = ({ type }: { type: FormType }) => {
         <div className="flex flex-row gap-2 justify-center">
           <Image
             src="/logo.svg"
-            alt="logo de PrepWise"
-            height={32}
-            width={38}
+            alt="logo de DevCareer AI"
+            height={36}
+            width={36}
           />
-          <h2 className="text-primary-100">PrepWise</h2>
+          <h2 className="text-primary-100">DevCareer AI</h2>
         </div>
 
         <h3>Practica entrevistas de trabajo con IA</h3>

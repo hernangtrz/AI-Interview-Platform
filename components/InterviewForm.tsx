@@ -54,7 +54,7 @@ const InterviewForm = ({ userId }: InterviewFormProps) => {
       );
 
       if (!res.ok) throw new Error("Error al generar la entrevista.");
-      router.push("/");
+      router.push("/dashboard");
     } catch (e) {
       setError("Ocurrió un error. Intenta de nuevo.");
     } finally {
