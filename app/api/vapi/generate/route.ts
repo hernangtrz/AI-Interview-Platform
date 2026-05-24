@@ -8,11 +8,13 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { type, role, level, techstack, amount, userid } = await request.json();
+  const body = await request.json();
+  const { type, role, level, techstack, amount, userid, userId } = body;
+  const finalUserId = userid || userId || "user_unknown";
 
   try {
     const { text: questions } = await generateText({
-      model: google("gemini-3-flash-preview"),
+      model: google("gemini-3.1-flash-lite-preview"),
       prompt: `Prepara preguntas para una entrevista de trabajo.
         El rol de el trabajo es ${role}.
         El nivel de experiencia es ${level}.
@@ -34,7 +36,7 @@ export async function POST(request: Request) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: userid,
+      userId: finalUserId,
       finalized: true,
       coverImage: getRandomInterviewCover(),
       createdAt: new Date().toISOString(),

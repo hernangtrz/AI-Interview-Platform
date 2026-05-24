@@ -101,6 +101,7 @@ const Agent = ({
         variableValues: {
           username: userName,
           userid: userId,
+          userId: userId,
         },
       });
     } else {
@@ -178,7 +179,7 @@ const Agent = ({
 
       <div className="w-full flex justify-center">
         {callStatus !== "ACTIVE" ? (
-          <button className="relative btn-call" onClick={handleCall}>
+          <button className="relative btn-call mt-5" onClick={handleCall}>
             <span
               className={cn(
                 "absolute animate-ping rounded-full opacity-75",
@@ -186,9 +187,7 @@ const Agent = ({
               )}
             />
 
-            <span>
-              {isCallInactiveOrFinished ? "Iniciar llamada" : "Conectando..."}
-            </span>
+            <span>{isCallInactiveOrFinished ? "Llamar" : ". . ."}</span>
           </button>
         ) : (
           <button className="btn-disconnect" onClick={handleDisconnect}>

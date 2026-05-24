@@ -13,13 +13,15 @@ const Page = async ({ params }: RouteParams) => {
 
   if (!interview) redirect("/");
 
-  const normalizeType = (value: string) => {
-    if (/mix|combinada|mixed/gi.test(value)) return "Mixta";
-    if (/tech|técnica/gi.test(value)) return "Técnica";
-    if (/conduct|conductual/gi.test(value)) return "Conductual";
-    if (/cultural|fit/gi.test(value)) return "Ajuste cultural";
-    return value;
+  const typeTranslations: Record<string, string> = {
+    Technical: "Técnica",
+    Behavioral: "Conductual",
+    Mixed: "Mixta",
+    tecnica: "Técnica",
+    conductual: "Conductual",
+    combinada: "Combinada",
   };
+  const displayType = typeTranslations[interview.type] || interview.type;
 
   return (
     <>
@@ -28,7 +30,7 @@ const Page = async ({ params }: RouteParams) => {
           <div className="flex flex-row gap-4 items-center">
             <Image
               src={getRandomInterviewCover()}
-              alt="imagen de portada"
+              alt="cover-image"
               width={40}
               height={40}
               className="rounded-full object-cover size-[40px]"
@@ -40,7 +42,7 @@ const Page = async ({ params }: RouteParams) => {
         </div>
 
         <p className="bg-dark-200 px-4 py-2 rounded-lg h-fit capitalize">
-          {normalizeType(interview.type)}
+          {displayType}
         </p>
       </div>
 
