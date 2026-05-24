@@ -9,12 +9,13 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const body = await request.json();
+  console.log("Body recibido de Vapi:", JSON.stringify(body));
   const { type, role, level, techstack, amount, userid, userId } = body;
   const finalUserId = userid || userId || "user_unknown";
 
   try {
     const { text: questions } = await generateText({
-      model: google("gemini-3.1-flash-lite-preview"),
+      model: google("gemini-2.0-flash"),
       prompt: `Prepara preguntas para una entrevista de trabajo.
         El rol de el trabajo es ${role}.
         El nivel de experiencia es ${level}.
