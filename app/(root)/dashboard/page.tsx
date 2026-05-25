@@ -63,6 +63,7 @@ const Page = async () => {
           alt="AI Robot DevCareer"
           width={550}
           height={550}
+          unoptimized // ← agrega esto
           className="max-sm:hidden object-contain -mr-16 scale-110 hover:scale-115 transition-transform duration-300"
         />
       </section>
