@@ -59,7 +59,7 @@ const Page = async () => {
           </Button>
         </div>
         <Image
-          src="/Robotv2.png"
+          src="/Robotv3.png"
           alt="AI Robot DevCareer"
           width={550}
           height={550}
